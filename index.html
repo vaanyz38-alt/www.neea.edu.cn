@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片展示</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px 12px;
+  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont,
+               "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px #00000015;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 5px;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+#clock {
+  color: #333;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+</style>
+</head>
+
+<body>
+<main>
+  <img src="photo.jpg" alt="图片展示">
+
+  <footer>
+    <div>此網頁由 ecert.neea.edu.cn 提供</div>
+    <div>页面时间为访问设备的本地时间</div>
+    <div id="clock">正在获取时间……</div>
+    <div id="timezone"></div>
+  </footer>
+</main>
+
+<script>
+function updateClock() {
+  const now = new Date();
+
+  const date = new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "short"
+  }).format(now);
+
+  const time = new Intl.DateTimeFormat("zh-CN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false
+  }).format(now);
+
+  document.getElementById("clock").textContent =
+    date + " " + time;
+
+  document.getElementById("timezone").textContent =
+    "时区：" +
+    Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
